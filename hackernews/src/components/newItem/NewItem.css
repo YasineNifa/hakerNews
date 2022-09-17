@@ -1,13 +1,12 @@
 .new__container{
     border-bottom: 1px solid black;
     padding: 10px 10px;
+    /*border-radius: 5px;*/
 
-    /*border-radius: 5px;
-    border: 1px black solid;
-    padding: 10px 10px;
+    /*
     margin: 10px 0px;
     min-height: 70px;
-    vertical-align:middle;*/
+    */
 }
 .new__container:hover{
     --tw-bg-opacity: 1;
@@ -16,7 +15,7 @@
 .new__data{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 }
 .new__metadata{
     font-size: 10px;

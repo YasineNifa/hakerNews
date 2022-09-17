@@ -6,7 +6,7 @@ function NewItem({article,itemIndex}) {
         <div className='new__container'>
             <div className='new__data'>
                 <span className='new__title'><span className='new__index'>{itemIndex}.</span> {article.title}</span>
-                <a className='new__url' href={article.url}>{article.url && ((article.url))}</a>
+                <a className='new__url' href={article.url}>{article.url && article.url}</a>
             </div>
             <div className='new__metadata'>
                 <span>{article.points} points</span>
