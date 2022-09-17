@@ -1,4 +1,5 @@
 import React from 'react'
+import { diffTime } from '../../helpers/utils'
 import './NewItem.css'
 function NewItem({article,itemIndex}) {
     return (
@@ -10,7 +11,7 @@ function NewItem({article,itemIndex}) {
             <div className='new__metadata'>
                 <span>{article.points} points</span>
                 <span className='metadata__element'> By <span className='metadata__value'>{article.author}</span></span>
-                <span className='metadata__element'> {(article.created_at)} | </span>
+                <span className='metadata__element'> {diffTime(article.created_at)} | </span>
                 <span className='metadata__value'> {article.num_comments} comments</span>
             </div>
         </div>
