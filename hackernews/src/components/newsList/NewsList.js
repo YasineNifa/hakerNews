@@ -3,7 +3,7 @@ import axios from 'axios'
 import NewItem from '../newItem/NewItem';
 import "./NewsList.css"
 
-function NewsList() {
+function NewsList({refresh}) {
     const [news, setNews] = useState([]);
     const [nbrPages, setNbrPages] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +55,7 @@ function NewsList() {
             getData();
         }, 30000);
         return () => clearInterval(interval);
-    }, [currentPage])
+    }, [currentPage, refresh])
 
     return (
         <>
