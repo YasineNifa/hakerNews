@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import NewItem from '../newItem/NewItem';
+import "./NewsList.css"
 
 function NewsList() {
     const [news, setNews] = useState([]);
@@ -21,9 +22,36 @@ function NewsList() {
         }
     }
 
+    const handlePrevious = () => {
+        setCurrentPage(currentPage - 1)
+    }
+
+    const handleNext = () => {
+        setCurrentPage(currentPage + 1)
+    }
+
+    const renderButtons = () => {
+        if(currentPage === 0 ){
+            return(
+                <button className='button' onClick={handleNext}>More</button>
+            )
+        }else if(currentPage === nbrPages-1){
+            return(
+                <button className='button' onClick={handlePrevious}>Previous</button>
+            )
+        } else{
+            return(
+                <div className='button__container'>
+                    <button className='button' onClick={handlePrevious}>Prev</button>
+                    <button className='button' onClick={handleNext}>More</button>
+                </div>
+            )
+        }
+    }
+
     useEffect(() => {
         getData();
-    }, [])
+    }, [currentPage])
 
     return (
         <>
@@ -37,6 +65,7 @@ function NewsList() {
                                 news.map((item, index) => <NewItem article={item} key={item.objectID} itemIndex={(currentPage * 20) + (index+1)} /> )
                             }
                         </div>
+                        <div>{renderButtons()}</div>
 
                     </div>
                 )
