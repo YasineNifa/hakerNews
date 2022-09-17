@@ -51,6 +51,10 @@ function NewsList() {
 
     useEffect(() => {
         getData();
+        const interval = setInterval(() => {
+            getData();
+        }, 30000);
+        return () => clearInterval(interval);
     }, [currentPage])
 
     return (
