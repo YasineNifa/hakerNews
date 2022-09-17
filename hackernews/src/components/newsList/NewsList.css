@@ -7,23 +7,3 @@
     flex-direction: row;
     align-items: center;
 }
-.button{
-    background-color: orange;
-    border: solid 1px orange;
-    color: white;
-    width: max-content;
-    padding: 13px 22px;
-    text-transform: uppercase;
-    border-radius: 6px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    margin: 10px 10px;
-    cursor: pointer;
-}
-.button:hover {
-    background-color: #ffffff;
-    color: orange;
-    transition: all 0.3s ease 0s;
-    transform: translateY(-3px);
-  }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import NewItem from '../newItem/NewItem';
 import "./NewsList.css"
+import { getHackerNewsPerPage } from '../../services/hackerNewsApi';
+import Navigation from '../navigation/Navigation';
 
 function NewsList({refresh}) {
     const [news, setNews] = useState([]);
@@ -9,48 +10,21 @@ function NewsList({refresh}) {
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(0);
 
-    const getData = async () => {
-        try{
-            const {data} = await axios.get(`https://hn.algolia.com/api/v1/search?&page=${currentPage}`);
-            const {hits, nbPages} = data;
-            setNews(hits);
-            setNbrPages(nbPages);
-        } catch(err){
-            console.error(err.message);
-        } finally{
-            setIsLoading(false);
-        }
-    }
-
-    const handlePrevious = () => {
-        setCurrentPage(currentPage - 1)
-    }
-
-    const handleNext = () => {
-        setCurrentPage(currentPage + 1)
-    }
-
-    const renderButtons = () => {
-        if(currentPage === 0 ){
-            return(
-                <button className='button' onClick={handleNext}>More</button>
-            )
-        }else if(currentPage === nbrPages-1){
-            return(
-                <button className='button' onClick={handlePrevious}>Previous</button>
-            )
-        } else{
-            return(
-                <div className='button__container'>
-                    <button className='button' onClick={handlePrevious}>Prev</button>
-                    <button className='button' onClick={handleNext}>More</button>
-                </div>
-            )
-        }
+    const getData = () => {
+        getHackerNewsPerPage(currentPage)
+        .then(res => {
+            const {hits, nbPages} = res.data
+            setNews(hits)
+            setNbrPages(nbPages)
+        })
+        .catch(err=>{
+            console.error(err.message)
+        })
+        .finally(() => setIsLoading(false))
     }
 
     useEffect(() => {
-        getData();
+        getData()
         const interval = setInterval(() => {
             getData();
         }, 30000);
@@ -69,8 +43,7 @@ function NewsList({refresh}) {
                                 news.map((item, index) => <NewItem article={item} key={item.objectID} itemIndex={(currentPage * 20) + (index+1)} /> )
                             }
                         </div>
-                        <div>{renderButtons()}</div>
-
+                        <Navigation currentPage={currentPage} nbrPages={nbrPages} handleChange={setCurrentPage} />
                     </div>
                 )
             }
