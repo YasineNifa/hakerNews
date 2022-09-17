@@ -2,6 +2,7 @@ import React from 'react'
 import Headroom from "react-headroom"
 import SyncIcon from "@mui/icons-material/Sync"
 import "./Header.css"
+
 function Header({refresh, handleRefresh}) {
     const handleClick = () => {
         handleRefresh(!refresh)
