@@ -1,0 +1,15 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: orange;
+    height: 70px;
+    padding: 0px 10px;
+}
+.logo{
+    text-decoration: none;
+}
+.logo__title{
+    font-size: large;
+    color: black;
+}
