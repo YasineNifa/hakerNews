@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import NewItem from '../newItem/NewItem';
 
 function NewsList() {
     const [news, setNews] = useState([]);
@@ -25,7 +26,22 @@ function NewsList() {
     }, [])
 
     return (
-        <div>NewsList</div>
+        <>
+            {
+                isLoading ?
+                (<p>Fetching Data ...</p>):
+                (
+                    <div className='list__container'>
+                        <div>
+                            {
+                                news.map((item, index) => <NewItem article={item} key={item.objectID} itemIndex={(currentPage * 20) + (index+1)} /> )
+                            }
+                        </div>
+
+                    </div>
+                )
+            }
+        </>
     )
 }
 
